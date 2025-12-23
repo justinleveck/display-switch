@@ -58,10 +58,12 @@ The script will show all available inputs:
 ```
 Available inputs on your LG TV:
 ==================================================
-  • HDMI 1               → com.webos.app.hdmi1
-  • HDMI 2               → com.webos.app.hdmi2
-  • HDMI 3               → com.webos.app.hdmi3
-  • HDMI 4               → com.webos.app.hdmi4
+Use these input names with the 'switch' command:
+
+  • HDMI 1               → HDMI_1
+  • HDMI 2               → HDMI_2
+  • HDMI 3               → HDMI_3
+  • HDMI 4               → HDMI_4
 ==================================================
 ```
 
@@ -72,8 +74,8 @@ Credentials are saved to `~/.lg_tv_keys.json` - future commands won't require pa
 Try switching between inputs:
 
 ```bash
-./lg_switch 192.168.1.100 switch com.webos.app.hdmi1
-./lg_switch 192.168.1.100 switch com.webos.app.hdmi2
+./lg_switch 192.168.1.100 switch HDMI_1
+./lg_switch 192.168.1.100 switch HDMI_2
 ```
 
 Your TV should immediately switch inputs!
@@ -112,17 +114,17 @@ Edit `~/Library/Preferences/display-switch.ini`:
 usb_device = "046d:c52b"  # Replace with YOUR device ID
 
 # When USB device connects, switch to HDMI 1
-on_usb_connect_execute = "/Users/YOUR_USERNAME/code/display-switch/lg_switch 192.168.1.100 switch com.webos.app.hdmi1"
+on_usb_connect_execute = "/Users/YOUR_USERNAME/code/display-switch/lg_switch 192.168.1.100 switch HDMI_1"
 
 # When USB device disconnects, switch to HDMI 2
-on_usb_disconnect_execute = "/Users/YOUR_USERNAME/code/display-switch/lg_switch 192.168.1.100 switch com.webos.app.hdmi2"
+on_usb_disconnect_execute = "/Users/YOUR_USERNAME/code/display-switch/lg_switch 192.168.1.100 switch HDMI_2"
 ```
 
 **Important**: Replace:
 - `YOUR_USERNAME` with your actual username
 - `192.168.1.100` with your TV's IP address
 - `046d:c52b` with your USB device ID
-- `com.webos.app.hdmi1` and `com.webos.app.hdmi2` with the correct inputs for your setup
+- `HDMI_1` and `HDMI_2` with the correct inputs for your setup
 
 ### Step 8: Run display-switch
 
@@ -148,8 +150,8 @@ Work MacBook on HDMI 4, Personal MacBook on HDMI 2:
 
 ```ini
 usb_device = "046d:c52b"
-on_usb_connect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch com.webos.app.hdmi4"
-on_usb_disconnect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch com.webos.app.hdmi2"
+on_usb_connect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch HDMI_4"
+on_usb_disconnect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch HDMI_2"
 ```
 
 ### Example 2: With Additional Commands
@@ -158,8 +160,8 @@ Run extra commands when switching (e.g., wake displays):
 
 ```ini
 usb_device = "046d:c52b"
-on_usb_connect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch com.webos.app.hdmi1 && caffeinate -u -t 1"
-on_usb_disconnect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch com.webos.app.hdmi2"
+on_usb_connect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch HDMI_1 && caffeinate -u -t 1"
+on_usb_disconnect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch HDMI_2"
 ```
 
 ### Example 3: Multiple TVs
@@ -168,7 +170,7 @@ If you have multiple LG TVs:
 
 ```ini
 usb_device = "046d:c52b"
-on_usb_connect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch com.webos.app.hdmi1 && /Users/john/code/display-switch/lg_switch 192.168.1.101 switch com.webos.app.hdmi1"
+on_usb_connect_execute = "/Users/john/code/display-switch/lg_switch 192.168.1.100 switch HDMI_1 && /Users/john/code/display-switch/lg_switch 192.168.1.101 switch HDMI_1"
 ```
 
 ---
@@ -326,11 +328,11 @@ You can use `lg_switch` standalone without `display_switch`:
 ./lg_switch 192.168.1.100 list
 
 # Switch to specific input
-./lg_switch 192.168.1.100 switch com.webos.app.hdmi1
+./lg_switch 192.168.1.100 switch HDMI_1
 
 # Create aliases for quick access
-alias tv-hdmi1='./lg_switch 192.168.1.100 switch com.webos.app.hdmi1'
-alias tv-hdmi2='./lg_switch 192.168.1.100 switch com.webos.app.hdmi2'
+alias tv-hdmi1='./lg_switch 192.168.1.100 switch HDMI_1'
+alias tv-hdmi2='./lg_switch 192.168.1.100 switch HDMI_2'
 ```
 
 ### Integration with Other Tools
@@ -347,7 +349,7 @@ The network API script can be integrated with:
 Create a shell script `~/bin/tv-work.sh`:
 ```bash
 #!/bin/bash
-~/code/display-switch/lg_switch 192.168.1.100 switch com.webos.app.hdmi1
+~/code/display-switch/lg_switch 192.168.1.100 switch HDMI_1
 ```
 
 Bind it to a keyboard shortcut using System Settings or Keyboard Maestro.
@@ -365,13 +367,13 @@ Bind it to a keyboard shortcut using System Settings or Keyboard Maestro.
 
 ### Input IDs
 
-Common LG webOS input app IDs:
-- HDMI 1: `com.webos.app.hdmi1`
-- HDMI 2: `com.webos.app.hdmi2`
-- HDMI 3: `com.webos.app.hdmi3`
-- HDMI 4: `com.webos.app.hdmi4`
-- AV: `com.webos.app.externalinput.av1`
-- Component: `com.webos.app.externalinput.component`
+Common LG webOS input names for switching:
+- HDMI 1: `HDMI_1`
+- HDMI 2: `HDMI_2`
+- HDMI 3: `HDMI_3`
+- HDMI 4: `HDMI_4`
+
+Note: The `get_inputs()` API returns full app IDs like `com.webos.app.hdmi1`, but the `set_input()` API requires the simpler format like `HDMI_1`. The `lg_switch` script handles this correctly.
 
 ### Python Library
 

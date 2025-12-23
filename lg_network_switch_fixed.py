@@ -128,10 +128,17 @@ async def list_inputs(tv_ip: str):
         inputs = await client.get_inputs()
         print("\nAvailable inputs on your LG TV:")
         print("=" * 50)
+        print("Use these input names with the 'switch' command:")
+        print()
         for inp in inputs:
-            input_id = inp.get('appId', 'Unknown')
             label = inp.get('label', 'Unknown')
-            print(f"  • {label:20s} → {input_id}")
+            # Convert label like "HDMI 1" to "HDMI_1" format that set_input expects
+            if 'HDMI' in label:
+                input_name = label.replace(' ', '_')
+                print(f"  • {label:20s} → {input_name}")
+            else:
+                app_id = inp.get('appId', 'Unknown')
+                print(f"  • {label:20s} → {app_id}")
         print("=" * 50)
 
     except Exception as e:
