@@ -14,6 +14,10 @@ monitors "one way" and relies on itself running on the other computers to switch
 
 The app should function on MacOS, Windows, and Linux.
 
+### LG TV / OLED Users
+
+If you have an LG webOS TV (OLED or LCD), DDC/CI may not work reliably. Instead, use the **network API solution** documented in **[LG_TV_GUIDE.md](LG_TV_GUIDE.md)** for reliable input switching over WiFi.
+
 ## Installation
  * Linux and Windows: download and extract the files from the releases page and place them where
    you see fit.

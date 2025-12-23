@@ -38,3 +38,15 @@ uinput = "0.1"
 winapi = { version = "0.3", features = ["winuser", "libloaderapi", "wincon"] }
 ddc-winapi = "0.2"
 nvapi = "0.1"
+
+[[bin]]
+name = "test_switch"
+path = "test_switch.rs"
+
+[[bin]]
+name = "diagnose_lg"
+path = "diagnose_lg.rs"
+
+[[bin]]
+name = "test_brightness"
+path = "test_brightness.rs"

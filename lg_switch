@@ -1,0 +1,13 @@
+#!/bin/bash
+# Wrapper script that automatically uses the virtual environment
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+VENV_PYTHON="$SCRIPT_DIR/venv/bin/python3"
+
+if [ ! -f "$VENV_PYTHON" ]; then
+    echo "ERROR: Virtual environment not found!"
+    echo "Run: ./setup_lg_network.sh"
+    exit 1
+fi
+
+exec "$VENV_PYTHON" "$SCRIPT_DIR/lg_network_switch_fixed.py" "$@"
